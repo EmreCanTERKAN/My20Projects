@@ -28,9 +28,10 @@ namespace Project1_AdonetCustomerProject
 
         }
 
+        SqlConnection sqlConnection = new SqlConnection("Server=DESKTOP-GRDREHV\\SQLEXPRESS; initial catalog=DbCustomer; integrated security=true");
         private void btnList_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection("Server=DESKTOP-GRDREHV\\SQLEXPRESS; initial catalog=DbCustomer; integrated security=true");
+            
 
             sqlConnection.Open();
             //Sorgu oluşturdu.
@@ -45,6 +46,21 @@ namespace Project1_AdonetCustomerProject
             dataGridView1.DataSource = dataTable;
 
             sqlConnection.Close();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlConnection = new SqlConnection("Server=DESKTOP-GRDREHV\\SQLEXPRESS; initial catalog=DbCustomer; integrated security=true");
+
+
+            sqlConnection.Open();
+            SqlCommand command = new SqlCommand("insert into City (CityName,CityCountry) values (@cityName,@cityCountry)", sqlConnection);
+            command.Parameters.AddWithValue("@cityName", txtCityName.Text);
+            command.Parameters.AddWithValue("@cityCountry", txtCountry.Text);
+            command.ExecuteNonQuery();
+            sqlConnection.Close();
+            MessageBox.Show("Şehir başarılı bir şekilde eklendi.");
+
         }
     }
 }

@@ -22,5 +22,11 @@ namespace Project1_AdonetCustomerProject
             FrmCity frmCity = new FrmCity();
             frmCity.Show();
         }
+
+        private void btnOpenCustomer_Click(object sender, EventArgs e)
+        {
+            FrmCustomer frmCustomer = new FrmCustomer();
+            frmCustomer.Show();
+        }
     }
 }

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Project1_AdonetCustomerProject
 {
-    public partial class Form1 : Form
+    public partial class FrmCity : Form
     {
-        public Form1()
+        public FrmCity()
         {
             InitializeComponent();
         }
@@ -83,6 +83,20 @@ namespace Project1_AdonetCustomerProject
             command.ExecuteNonQuery();
             sqlConnection.Close();
             MessageBox.Show("Şehir Başarılı bir Şekilde Güncellendi", "Uyarı!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            sqlConnection.Open();
+
+            SqlCommand command = new SqlCommand("Select * From City Where CityName=@cityName", sqlConnection);
+            command.Parameters.AddWithValue("@cityName", txtCityName.Text);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            dataGridView1.DataSource = dataTable;
+            sqlConnection.Close();
 
         }
     }

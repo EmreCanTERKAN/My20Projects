@@ -58,5 +58,41 @@ namespace Project1_AdonetCustomerProject
 
             sqlConnection.Close();
         }
+
+        private void FrmCustomer_Load(object sender, EventArgs e)
+        {
+            sqlConnection.Open();
+            //Sorgu oluşturdu.
+            SqlCommand command = new SqlCommand("Select * From City", sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            cmbCitiation.ValueMember = "CityId";
+            cmbCitiation.DisplayMember = "CityName";
+            cmbCitiation.DataSource = dataTable;
+            sqlConnection.Close();
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            sqlConnection.Open();
+            SqlCommand command = new SqlCommand("Insert Into Customer (CustomerName,CustomerSurname,CustomerCity,CustomerBalance,CustomerStatus) values(@customerName,@customerSurname,@customerCity,@customerBalance,@customerStatus)",sqlConnection);
+            command.Parameters.AddWithValue("@customerName", txtCustomerName.Text);
+            command.Parameters.AddWithValue("@customerSurname", txtCustomerSurname.Text);
+            command.Parameters.AddWithValue("@customerCity", cmbCitiation.SelectedValue);
+            command.Parameters.AddWithValue("@customerBalance", txtCustomerAmount.Text);
+            if (rdbActive.Checked)
+            {
+                command.Parameters.AddWithValue("@customerStatus", true);
+            }
+            if (rdbPassive.Checked)
+            {
+                command.Parameters.AddWithValue("@customerStatus", false);
+            }
+            command.ExecuteNonQuery();
+            sqlConnection.Close();
+            MessageBox.Show("Müşteri Başarıyla Eklendi");
+        }
     }
 }

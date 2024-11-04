@@ -94,5 +94,48 @@ namespace Project1_AdonetCustomerProject
             sqlConnection.Close();
             MessageBox.Show("Müşteri Başarıyla Eklendi");
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            sqlConnection.Open();
+            SqlCommand command = new SqlCommand("Delete From Customer Where CustomerId=@customerId", sqlConnection);
+            command.Parameters.AddWithValue("@customerId", txtCustomerId.Text);
+            command.ExecuteNonQuery();
+            sqlConnection.Close();
+            MessageBox.Show("Müşteri Başarılı bir Şekilde Silindi", "Uyarı!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection("YourConnectionString"))
+            {
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand("UPDATE Customer SET CustomerName=@customerName, CustomerSurname=@customerSurname, CustomerCity=@customerCity, CustomerBalance=@customerBalance, CustomerStatus=@customerStatus WHERE CustomerId=@customerId", sqlConnection);
+
+                command.Parameters.AddWithValue("@customerName", txtCustomerName.Text);
+                command.Parameters.AddWithValue("@customerSurname", txtCustomerSurname.Text);
+                command.Parameters.AddWithValue("@customerCity", cmbCitiation.SelectedValue);
+                command.Parameters.AddWithValue("@customerBalance", txtCustomerAmount.Text);
+                command.Parameters.AddWithValue("@customerId", txtCustomerId.Text);
+
+                if (rdbActive.Checked)
+                {
+                    command.Parameters.AddWithValue("@customerStatus", true);
+                }
+                else if (rdbPassive.Checked)
+                {
+                    command.Parameters.AddWithValue("@customerStatus", false);
+                }
+                else
+                {
+                    // Eğer hiçbir radio button seçilmediyse, default bir değer atanabilir.
+                    command.Parameters.AddWithValue("@customerStatus", false); // Veya başka bir değer.
+                }
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("Müşteri Başarıyla Güncellendi");
+            } // using bloğu burada bağlantıyı otomatik kapatır.
+        }
+
     }
 }

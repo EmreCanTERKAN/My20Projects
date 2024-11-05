@@ -95,6 +95,27 @@ namespace Project3_EntityFrameworkStatistics
             var activeProductCount = db.TblProduct.Count(x => x.ProductStatus == true);
             lblActiveProductCount.Text = activeProductCount.ToString();
 
+            //Toplam Kola Hasılatı
+
+            var colaStock = db.TblProduct.Where(c => c.ProductName == "Kola").Select(x => x.ProductStock).FirstOrDefault();
+            var colaPrice = db.TblProduct.Where(x => x.ProductName == "Kola").Select(y => y.ProductPrice).FirstOrDefault();
+            var totalColaStockPrice = colaStock * colaPrice;
+            lblTotalPriceCola.Text = totalColaStockPrice + "₺";
+
+            // Sisteme Son Eklenen MüşteriAdı
+            var lastCustomerId = db.TblOrder.OrderByDescending(x => x.OrderId).Select(c => c.CustomerId).FirstOrDefault();
+
+            var lastCustomerName = db.TblCustomer.Where(x => x.CustomerId == lastCustomerId).Select(x => x.CustomerName).FirstOrDefault();
+            lblLastCustomerName.Text = lastCustomerName.ToString();
+
+            // Kaç Farklı Ülke Çeşiti Var
+
+            var countryDifferentCount = db.TblCustomer.Select(x => x.CustomerCountry).Distinct().Count();
+            lblCountryDifferentCount.Text = countryDifferentCount.ToString();
+
+
+
+
         }
 
         private void label2_Click(object sender, EventArgs e)

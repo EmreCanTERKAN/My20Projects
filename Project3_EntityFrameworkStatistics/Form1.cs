@@ -57,8 +57,10 @@ namespace Project3_EntityFrameworkStatistics
                 .Sum(x => x.ProductStock);
             lblProductCountByCategoryStatusTrue.Text = productStockCountByCategoryNameIsSebzeAndStatusIsTrue.ToString();
             //Türkiyeden yapılan Siparişler.. SqlQuery
+
             var orderCountFromTurkiye = db.Database.SqlQuery<int>("Select count(*) From TblOrder Where CustomerId In(Select CustomerId From TblCustomer Where CustomerCountry='Türkiye')").FirstOrDefault();
             lblOrderCountFromTurkiye.Text = orderCountFromTurkiye.ToString();
+
             //Türkiyeden yapılan Siparişler..EF ile getirme
             var turkishCustomerIds = db.TblCustomer
                 .Where(x => x.CustomerCountry == "Türkiye")
@@ -66,6 +68,17 @@ namespace Project3_EntityFrameworkStatistics
                 .ToList();
             var ordercountFromTurkiyeEf = db.TblOrder.Count(z => turkishCustomerIds.Contains(z.CustomerId.Value));
             lblOrderCountFromTurkiyeEfCore.Text = ordercountFromTurkiyeEf.ToString();
+            //Siparişlerden kategorisi meyve olan ürünlerin toplam satış fiyatı
+            
+
+            var orderTotalPriceByCategoryIsFruit = db.Database.SqlQuery<decimal>("SELECT SUM(o.TotalPrice) AS TotalMeyvePrice FROM TblOrder o JOIN TblProduct p ON o.productId = p.productId JOIN TblCategory c ON p.categoryId = c.categoryId WHERE c.CatergoryName = 'Meyve';").FirstOrDefault();
+            lblTotalPriceByCategoryIsFruit.Text = orderTotalPriceByCategoryIsFruit.ToString() + " ₺";
+
+            ////Siparişlerden kategorisi meyve olan ürünlerin toplam satış fiyatı EF ile
+            var orderTotalPriceByCategoryIsFruitEf = db.TblOrder
+                .Where(o => o.TblProduct.TblCategory.CatergoryName == "Meyve")
+                .Sum(o => o.TotalPrice);
+            lblTotalPriceByCategoryIsFruitEf.Text = orderTotalPriceByCategoryIsFruitEf.ToString() + " ₺";
 
         }
 

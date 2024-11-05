@@ -80,6 +80,21 @@ namespace Project3_EntityFrameworkStatistics
                 .Sum(o => o.TotalPrice);
             lblTotalPriceByCategoryIsFruitEf.Text = orderTotalPriceByCategoryIsFruitEf.ToString() + " ₺";
 
+            // Son eklenen ürünün adı
+
+            var lastProductName = db.TblProduct.OrderByDescending(x => x.ProductId).Select(y => y.ProductName).FirstOrDefault();
+            lblLastProductName.Text = lastProductName.ToString();
+
+            // Son eklenen ürünün kategorisi
+
+            var lastProductCategoryName = db.TblProduct.OrderByDescending(x => x.ProductId).FirstOrDefault();
+            var categoryName = lastProductCategoryName.TblCategory.CatergoryName;
+            lblLastProductCategoryName.Text = categoryName.ToString();
+
+            // Aktif Ürün Sayısı
+            var activeProductCount = db.TblProduct.Count(x => x.ProductStatus == true);
+            lblActiveProductCount.Text = activeProductCount.ToString();
+
         }
 
         private void label2_Click(object sender, EventArgs e)

@@ -53,14 +53,25 @@ namespace Project3_EntityFrameworkStatistics
             lblProductCountSmaller100.Text = totalCountSmallerThen100.ToString();
             //Kategorisi sebze vve durumu aktif(true) olan ürün stok toplamı
             var productStockCountByCategoryNameIsSebzeAndStatusIsTrue = db.TblProduct
-                .Where(x => x.CategoryId == (db.TblCategory.Where(y => y.CatergoryName =="Sebze").Select(z=> z.CategoryId).FirstOrDefault()) && x.ProductStatus == true)
+                .Where(x => x.CategoryId == (db.TblCategory.Where(y => y.CatergoryName == "Sebze").Select(z => z.CategoryId).FirstOrDefault()) && x.ProductStatus == true)
                 .Sum(x => x.ProductStock);
             lblProductCountByCategoryStatusTrue.Text = productStockCountByCategoryNameIsSebzeAndStatusIsTrue.ToString();
-            //Türkiyeden yapılan Siparişler..
-            var customerId = db.TblCustomer.Where(x => x.CustomerCountry == "Türkiye").Select(y => y.CustomerId).ToList();
-            lblOrderCountFromTurkiye.Text = customerId.ToString();
+            //Türkiyeden yapılan Siparişler.. SqlQuery
+            var orderCountFromTurkiye = db.Database.SqlQuery<int>("Select count(*) From TblOrder Where CustomerId In(Select CustomerId From TblCustomer Where CustomerCountry='Türkiye')").FirstOrDefault();
+            lblOrderCountFromTurkiye.Text = orderCountFromTurkiye.ToString();
+            //Türkiyeden yapılan Siparişler..EF ile getirme
+            var turkishCustomerIds = db.TblCustomer
+                .Where(x => x.CustomerCountry == "Türkiye")
+                .Select(y => y.CustomerId)
+                .ToList();
+            var ordercountFromTurkiyeEf = db.TblOrder.Count(z => turkishCustomerIds.Contains(z.CustomerId.Value));
+            lblOrderCountFromTurkiyeEfCore.Text = ordercountFromTurkiyeEf.ToString();
 
-                
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

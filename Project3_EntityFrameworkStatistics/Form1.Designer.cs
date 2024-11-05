@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblCategoryCount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblProductCount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,8 +62,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblOrderCountFromTurkiyeEfCore = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -120,16 +120,6 @@
             this.panel1.Size = new System.Drawing.Size(308, 160);
             this.panel1.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Myanmar Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(84, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Kategori Sayısı:";
-            // 
             // lblCategoryCount
             // 
             this.lblCategoryCount.AutoSize = true;
@@ -139,6 +129,16 @@
             this.lblCategoryCount.Size = new System.Drawing.Size(85, 29);
             this.lblCategoryCount.TabIndex = 1;
             this.lblCategoryCount.Text = "label2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Myanmar Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(84, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(133, 32);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Kategori Sayısı:";
             // 
             // panel2
             // 
@@ -445,32 +445,33 @@
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(136)))), ((int)(((byte)(109)))));
-            this.panel12.Controls.Add(this.label23);
-            this.panel12.Controls.Add(this.label24);
+            this.panel12.Controls.Add(this.label2);
+            this.panel12.Controls.Add(this.lblOrderCountFromTurkiyeEfCore);
             this.panel12.Location = new System.Drawing.Point(400, 427);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(308, 160);
             this.panel12.TabIndex = 10;
             // 
-            // label23
+            // label2
             // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label23.Location = new System.Drawing.Point(108, 82);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(99, 29);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "label23";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Myanmar Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(18, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(272, 32);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Türkiyeden Yapılan Siparişler (EF)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // label24
+            // lblOrderCountFromTurkiyeEfCore
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Myanmar Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(84, 19);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(101, 32);
-            this.label24.TabIndex = 0;
-            this.label24.Text = "Ürün Sayısı";
+            this.lblOrderCountFromTurkiyeEfCore.AutoSize = true;
+            this.lblOrderCountFromTurkiyeEfCore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblOrderCountFromTurkiyeEfCore.Location = new System.Drawing.Point(108, 82);
+            this.lblOrderCountFromTurkiyeEfCore.Name = "lblOrderCountFromTurkiyeEfCore";
+            this.lblOrderCountFromTurkiyeEfCore.Size = new System.Drawing.Size(99, 29);
+            this.lblOrderCountFromTurkiyeEfCore.TabIndex = 1;
+            this.lblOrderCountFromTurkiyeEfCore.Text = "label23";
             // 
             // panel13
             // 
@@ -556,11 +557,11 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Myanmar Text", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(44, 19);
+            this.label30.Location = new System.Drawing.Point(13, 19);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(239, 32);
+            this.label30.Size = new System.Drawing.Size(281, 32);
             this.label30.TabIndex = 0;
-            this.label30.Text = "Türkiyeden Yapılan Siparişler";
+            this.label30.Text = "Türkiyeden Yapılan Siparişler(SQL)";
             // 
             // panel16
             // 
@@ -820,8 +821,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblOrderCountFromTurkiyeEfCore;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
@@ -846,6 +846,7 @@
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label2;
     }
 }
 

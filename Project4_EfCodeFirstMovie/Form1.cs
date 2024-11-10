@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project4_EfCodeFirstMovie.DAL.Context;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace Project4_EfCodeFirstMovie
         public Form1()
         {
             InitializeComponent();
+        }
+
+        MovieContext context = new MovieContext();
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            var values = context.Categories.ToList();
+            dataGridView1.DataSource = values;
         }
     }
 }
